@@ -1,0 +1,99 @@
+ALGORITHM problem commun elements solution1
+VAR
+    tab1,tab2,tab3:ARRAY OF INTEGER[15];
+    s,i,j,k:INTEGER;
+BEGIN
+    read(tab1);
+    read(tab2);
+     s:=0;
+    FOR i FROM 0 TO tab1.length-1 STEP 1 DO
+      FOR j FROM 0 TO tab2.length-1 STEP 1  DO
+        FOR k FROM 0 TO tab3.length-1 STEP 1  DO
+            IF (tab1[i]=tab2[j]) THEN
+                  tab3[k]=2*tab1[i]
+            END IF   
+           
+            s=s+tab3[k];   
+        END_FOR
+      END_FOR
+    END_FOR
+    write(s);
+END
+ALGORITHM problem commun elements solution2 
+VAR
+    tab1,tab2:ARRAY_OF_INTEGER[10];
+    s,i,j:INTEGER;
+    hash:HASH_TABLE<INTEGER,INTEGER>
+BEGIN
+    s:=0
+  FOR i FROM 0 TO tab1.length-1 STEP 1  DO
+      hash.insert(tab1[i],1)
+  END_FOR
+  FOR j FROM 0 TO tab2.length-1 STEP 1  DO
+     IF (hash.lookup(tab2[j])=TRUE) THEN
+         hash.insert(tab2[j],2)
+      ELSE
+           hash.insert(tab2[j],1)
+     END_IF
+  END_FOR
+
+FOR k FROM 0 TO tab1.length-1 STEP 1  DO
+    IF (hash.get(tab1[k])=2) THEN
+        s:=s + 2*tab1[k]
+    END_IF
+END_FOR
+write(s);
+END
+
+ALGORITHM problem distinct elements solution1
+VAR
+    tab1,tab2,tab3:ARRAY OF INTEGER[15];
+    s,i,j,k:INTEGER;
+BEGIN
+    read(tab1);
+    read(tab2);
+     s:=0;
+    FOR i FROM 0 TO tab1.length-1 STEP 1 DO
+      FOR j FROM 0 TO tab2.length-1 STEP 1  DO
+        FOR k FROM 0 TO tab3.length-1 STEP 1  DO
+            IF (tab1[i]<>tab2[j]) THEN
+            tab3[k]=tab1[i];
+            tab3[k+1]=tab2[j];
+            END IF
+            s:=s+tab3[k];
+        END_FOR
+      END_FOR  
+    END_FOR     
+END
+
+ALGORITHM problem distinct elements solution2
+VAR
+  tab1,tab2:ARRAY_OF_INTEGER[10];
+  s,i,j:INTEGER;
+  hash:HASH_TABLE<INTEGER,INTEGER>  
+BEGIN
+  s:=0
+  FOR i FROM 0 TO tab1.length-1 STEP 1  DO
+      hash.insert(tab1[i],1)
+  END_FOR
+  FOR j FROM 0 TO tab2.length-1 STEP 1  DO
+     IF (hash.lookup(tab2[j])=FALSE) THEN
+         hash.insert(tab2[j],1)
+      
+     END_IF
+  END_FOR
+
+FOR k FROM 0 TO tab1.length-1 STEP 1  DO
+    IF (hash.get(tab1[k])=1) THEN
+        s:=s + tab1[k]
+    END_IF
+
+END_FOR
+FOR l FROM 0 TO tab2.length-1 STEP 1  DO
+    IF (hash.get(tab2[l])=1) THEN
+        s:=s + tab1[l]
+    END_IF
+
+END_FOR
+ Write(s) 
+END
